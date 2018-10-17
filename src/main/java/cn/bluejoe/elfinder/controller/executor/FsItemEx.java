@@ -11,6 +11,8 @@ import cn.bluejoe.elfinder.service.FsItemFilter;
 import cn.bluejoe.elfinder.service.FsService;
 import cn.bluejoe.elfinder.service.FsVolume;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * FsItemEx is a helper class of a FsItem, A FsItemEx wraps a FsItem and its
  * context including FsService, FsVolume, etc
@@ -211,9 +213,9 @@ public class FsItemEx
 		return list;
 	}
 
-	public String getURL()
+	public String getURL(HttpServletRequest request)
 	{
-		return _v.getURL(_f);
+		return _v.getURL(request,_f);
 	}
 
 	public void filterOptions(Map<String, Object> map)

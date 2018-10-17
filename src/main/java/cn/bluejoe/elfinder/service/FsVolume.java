@@ -1,5 +1,6 @@
 package cn.bluejoe.elfinder.service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -60,7 +61,7 @@ public interface FsVolume
 	 * @return An absolute URL or <code>null</code> if we should not send back a
 	 *         URL.
 	 */
-	String getURL(FsItem f);
+	String getURL(HttpServletRequest request, FsItem f);
 
 	/**
 	 * This allows volumes to change the options returned to the client for a

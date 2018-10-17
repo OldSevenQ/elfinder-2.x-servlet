@@ -23,6 +23,9 @@ import org.apache.commons.io.IOUtils;
 import cn.bluejoe.elfinder.service.FsItem;
 import cn.bluejoe.elfinder.service.FsVolume;
 import cn.bluejoe.elfinder.util.MimeTypesUtils;
+import org.springframework.util.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class LocalFsVolume implements FsVolume
 {
@@ -205,10 +208,30 @@ public class LocalFsVolume implements FsVolume
 	}
 
 	@Override
-	public String getURL(FsItem f)
+	public String getURL(HttpServletRequest request, FsItem f)
 	{
 		// We are just happy to not supply a custom URL.
-		return null;
+		// "//localhost:8080/assessment/"
+		try {
+			StringBuilder sb = new StringBuilder("//");
+			sb.append(request.getServerName());
+			sb.append(":");
+			sb.append(request.getServerPort());
+			sb.append("/assessment/");
+			sb.append(_name);
+			String current = getPath(f);
+			sb.append(current);
+
+			File currentFile = asFile(f);
+			if (currentFile != null && currentFile.isDirectory()){
+				sb.append("/");
+			}
+
+			return sb.toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override

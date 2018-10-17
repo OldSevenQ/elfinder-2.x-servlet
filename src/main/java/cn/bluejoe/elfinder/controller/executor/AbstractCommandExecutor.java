@@ -180,7 +180,7 @@ public abstract class AbstractCommandExecutor implements CommandExecutor
 		{
 			info.put("dirs", fsi.hasChildFolder() ? 1 : 0);
 		}
-		String url = fsi.getURL();
+		String url = fsi.getURL(request);
 		if (url != null)
 		{
 			info.put("url", url);
@@ -211,7 +211,7 @@ public abstract class AbstractCommandExecutor implements CommandExecutor
 		map.put("uploadMaxConn", "-1");
 		// We don't have an implementation of zipdl at the moment.
 		map.put("disabled", Arrays.asList(new String[] { "zipdl" }));
-		String url = cwd.getURL();
+		String url = cwd.getURL(request);
 		if (url != null)
 		{
 			map.put("url", url);
