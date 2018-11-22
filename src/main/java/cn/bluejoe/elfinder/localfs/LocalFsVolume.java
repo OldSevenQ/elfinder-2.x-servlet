@@ -207,6 +207,14 @@ public class LocalFsVolume implements FsVolume
 		return null;
 	}
 
+
+	public String getSpecialPath(FsItem fsi) throws IOException
+	{
+		String fullPath = asFile(fsi).getCanonicalPath();
+		String relativePath = fullPath.substring(fullPath.indexOf("assessment"));
+		return relativePath.replace('\\', '/');
+	}
+
 	@Override
 	public String getURL(HttpServletRequest request, FsItem f)
 	{
@@ -216,10 +224,10 @@ public class LocalFsVolume implements FsVolume
 			StringBuilder sb = new StringBuilder("//");
 			sb.append(request.getServerName());
 			sb.append(":");
-			sb.append(request.getServerPort());
-			sb.append("/assessment/");
-			sb.append(_name);
-			String current = getPath(f);
+			sb.append(request.getServerPort()).append("/");
+//			sb.append("/assessment/tz_filed/");
+//			sb.append(_name);
+			String current = getSpecialPath(f);
 			sb.append(current);
 
 			File currentFile = asFile(f);

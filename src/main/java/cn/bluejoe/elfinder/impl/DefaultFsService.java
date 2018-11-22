@@ -1,11 +1,7 @@
 package cn.bluejoe.elfinder.impl;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import org.apache.commons.codec.binary.Base64;
@@ -25,7 +21,7 @@ public class DefaultFsService implements FsService
 
 	FsServiceConfig _serviceConfig;
 
-	Map<String, FsVolume> _volumeMap = new HashMap<String, FsVolume>();
+	Map<String, FsVolume> _volumeMap = new LinkedHashMap<>();
 
 	// special characters should be encoded, avoid to be processed as a part of
 	// URL
